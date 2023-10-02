@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "othi-next",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,40 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@radix-ui/react-tooltip": "^1.0.7",
+    "@swc-jotai/debug-label": "^0.1.0",
+    "@swc-jotai/react-refresh": "^0.1.0",
+    "@tanstack/react-query": "5.0.0-rc.4",
+    "@tanstack/react-query-devtools": "5.0.0-rc.4",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "dotenv": "^16.3.1",
+    "drizzle-kit": "^0.19.13",
+    "drizzle-orm": "^0.28.6",
+    "drizzle-zod": "^0.5.1",
+    "jotai": "^2.4.3",
+    "jotai-devtools": "^0.6.3",
+    "jotai-optics": "^0.3.1",
+    "lucide-react": "^0.279.0",
+    "next": "latest",
+    "next-themes": "^0.2.1",
+    "optics-ts": "^2.4.1",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest"
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
-    "typescript": "latest",
-    "@types/react": "latest",
     "@types/node": "latest",
+    "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest"
+    "typescript": "latest"
   }
 }
