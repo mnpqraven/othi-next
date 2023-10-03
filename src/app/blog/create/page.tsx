@@ -37,8 +37,10 @@ export default function Page() {
     if (!!state.message) {
       // BUG: disappears instantly because redirection
       toast({ description: state.message });
+      form.reset({ name: "", content: "" });
     }
-  }, [state, toast]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   return (
     <div>

@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { blogs } from "@/dbSchemas/blogs";
 import { db } from "@/lib/database";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Othi's Blog",
+};
 
 export default async function BlogPage() {
   const list = await db.select().from(blogs);

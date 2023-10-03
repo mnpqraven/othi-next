@@ -6,8 +6,8 @@ export const blogs = sqliteTable("blogs", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => ulid()),
-  name: text("name", { length: 255 }).notNull(),
-  content: text("content"),
+  name: text("name", { length: 256 }).notNull(),
+  content: text("content").notNull(),
   createdAt: int("createdAt", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),
