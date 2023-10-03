@@ -10,7 +10,8 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { DevTools } from "jotai-devtools";
 import { ThemeProvider } from "next-themes";
-import { Tooltip } from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { SessionProvider } from "next-auth/react";
 
 const TANSTACK_CONFIG: QueryClientConfig = {
   defaultOptions: {
@@ -26,18 +27,19 @@ export function Providers({ children }: RootProps) {
   const [queryClient] = useState(() => new QueryClient(TANSTACK_CONFIG));
 
   return (
-    <ThemeProvider attribute="class">
-      <Tooltip>
+    <SessionProvider>
+      <ThemeProvider attribute="class">
+        <TooltipProvider>
+          <QueryClientProvider client={queryClient}>
+            <Provider>
+              {children}
 
-      <QueryClientProvider client={queryClient}>
-        <Provider>
-          {children}
-
-          <ReactQueryDevtools initialIsOpen={false} />
-          <DevTools isInitialOpen={false} />
-        </Provider>
-      </QueryClientProvider>
-      </Tooltip>
-    </ThemeProvider>
+              <ReactQueryDevtools initialIsOpen={false} />
+              <DevTools isInitialOpen={false} />
+            </Provider>
+          </QueryClientProvider>
+        </TooltipProvider>
+      </ThemeProvider>
+    </SessionProvider>
   );
 }

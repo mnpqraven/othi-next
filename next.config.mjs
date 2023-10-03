@@ -1,3 +1,5 @@
+import "./src/env.mjs";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["jotai-devtools"],
@@ -6,7 +8,9 @@ const nextConfig = {
       ["@swc-jotai/react-refresh", {}],
       ["@swc-jotai/debug-label", {}],
     ],
+    serverActions: true,
+    serverComponentsExternalPackages: ["@libsql/client"],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

@@ -1,22 +1,32 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import "./globals.css";
+import type { Metadata } from "next";
+import { Providers } from "./Providers";
+import { Navbar } from "@/components/navbar/Navbar";
+import { Toaster } from "@/components/ui/toaster";
+import { Merriweather_Sans } from "next/font/google";
+import "@/app/globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Merriweather_Sans({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: 'Othi',
-  description: 'Othi',
-}
+  title: "Othi",
+  description: "Othi",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>
+          <Navbar />
+          <Toaster />
+          {children}
+        </Providers>
+      </body>
     </html>
-  )
+  );
 }
