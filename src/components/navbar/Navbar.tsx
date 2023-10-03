@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { routes, usePathCompare } from "./routes";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const { status } = useSession();
@@ -25,12 +26,15 @@ export function Navbar() {
         ))}
       </div>
 
-      {status == "authenticated" && (
-        <button onClick={() => signOut()}>sign out</button>
-      )}
-      {status == "unauthenticated" && (
-        <button onClick={() => signIn("github")}>sign in</button>
-      )}
+      <div className="flex gap-1">
+        <ThemeToggle />
+        {status == "authenticated" && (
+          <button onClick={() => signOut()}>sign out</button>
+        )}
+        {status == "unauthenticated" && (
+          <button onClick={() => signIn("github")}>sign in</button>
+        )}
+      </div>
     </div>
   );
 }

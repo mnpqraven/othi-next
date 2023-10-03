@@ -10,6 +10,7 @@ export interface NavbarItem {
 
 export const routes: NavbarItem[] = [
   { label: "Home", path: "/", icon: <Home /> },
+  { label: "About", path: "/about", icon: <Home /> },
   { label: "Blog", path: "/blog", icon: <Newspaper /> },
 ];
 
