@@ -15,13 +15,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { NewBlog, insertBlogSchema } from "@/dbSchemas/blogs";
 import { createBlog } from "../actions";
+// @ts-ignore
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 // @ts-ignore
 import { experimental_useFormState as useFormState } from "react-dom";
 import { useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
-const initialState = {
+const initialState: { message: string | null } = {
   message: null,
 };
 export default function Page() {
@@ -37,7 +38,7 @@ export default function Page() {
       // BUG: disappears instantly because redirection
       toast({ description: state.message });
     }
-  }, [state]);
+  }, [state, toast]);
 
   return (
     <div>
