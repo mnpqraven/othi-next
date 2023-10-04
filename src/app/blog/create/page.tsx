@@ -21,13 +21,16 @@ import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import { experimental_useFormState as useFormState } from "react-dom";
 import { useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { Textarea } from "@/components/ui/textarea";
 
-const initialState: { message: string | null } = {
+const initialState: { message: string | null; success: boolean } = {
   message: null,
+  success: false,
 };
 export default function Page() {
   const form = useForm<NewBlog>({
     resolver: zodResolver(insertBlogSchema),
+    defaultValues: { name: "", content: "" },
   });
   const { pending } = useFormStatus();
   const [state, formAction] = useFormState(createBlog, initialState);
@@ -35,20 +38,24 @@ export default function Page() {
 
   useEffect(() => {
     if (!!state.message) {
-      // BUG: disappears instantly because redirection
-      toast({ description: state.message });
+      toast({
+        description: state.message,
+        variant: state.success ? "default" : "destructive",
+      });
       form.reset({ name: "", content: "" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
+  function onSubmit(values: NewBlog) {
+    console.log("@client onSubmit", values);
+    formAction(values);
+  }
+
   return (
     <div>
       <Form {...form}>
-        <form
-          // onSubmit={form.handleSubmit(onSubmit)}
-          action={formAction}
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
             name="name"
@@ -56,7 +63,7 @@ export default function Page() {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="name" {...field} />
+                  <Input placeholder="name" autoComplete="off" {...field} />
                 </FormControl>
                 <FormDescription>
                   This is your public display name.
@@ -74,7 +81,7 @@ export default function Page() {
                 <FormLabel>Content</FormLabel>
                 <FormControl>
                   {/* @ts-ignore */}
-                  <Input placeholder="content" {...field} />
+                  <Textarea placeholder="content" autoComplete="" {...field} />
                 </FormControl>
                 <FormDescription>
                   This is your public display name.

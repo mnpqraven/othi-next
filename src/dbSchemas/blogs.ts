@@ -16,7 +16,12 @@ export const blogs = sqliteTable("blogs", {
     .$defaultFn(() => new Date()),
 });
 
-export const insertBlogSchema = createInsertSchema(blogs);
+export const insertBlogSchema = createInsertSchema(blogs, {
+  name: (schema) =>
+    schema.name.min(1, {
+      message: "Blog title must be at least 1 character long",
+    }),
+});
 
 export type Blog = typeof blogs.$inferSelect;
 export type NewBlog = typeof blogs.$inferInsert;
